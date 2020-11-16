@@ -1,5 +1,4 @@
-module.exports = [{
-    name: 'db1Connection',
+module.exports = {
     type: process.env.DB_TYPE,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
@@ -8,6 +7,7 @@ module.exports = [{
     database: process.env.DB_DATABASE,
     loggin: true,
     synchronize: true,
+    insecureAuth : true,
     entities: [
         __dirname + '/model/*.ts'
     ],
@@ -22,4 +22,4 @@ module.exports = [{
         migrationsDir: 'migration',
         subscribersDir: 'subscriber'
     }
-}] 
+}
