@@ -3,11 +3,11 @@ import Auth from './auth.entity';
 import Search from './search.entity';
 import TimeLog from './timerLog.entity';
 
-@Entity()
+@Entity('user')
 export default class User {
     @PrimaryGeneratedColumn()
     id!: number;
-    @Column()
+    @Column({type: "uuid", unique: true})
     @Generated('uuid')
     uuid!: string;
     @Column({unique: true})
@@ -18,7 +18,7 @@ export default class User {
     phone!: number;
     @Column({unique: true})
     bnetID!: string;
-    @OneToOne(()=> Auth)
+    @OneToOne(()=> Auth,{cascade: true})
     @JoinColumn()
     auth!: Auth;
     @OneToMany(() => Search, search => search.user)
