@@ -9,17 +9,17 @@ module.exports = {
     synchronize: false,
     migrationsTableName: 'actionhelper_migrations',
     entities: [
-        __dirname + '/model/*.entity.ts'
+        __dirname + '/src/model/*.entity.ts'
     ],
     subscribers: [
-        __dirname + '/subscriber/*.ts'
+        __dirname + '/src/subscriber/*.ts'
     ],
     migrations: [
-        __dirname + '/migration/*.ts'
+        __dirname + '/src/migration/*.ts'
     ],
     cli:{
-        entitiesDir: 'model',
-        migrationsDir: 'migration',
-        subscribersDir: 'subscriber'
+        entitiesDir: 'src/model',
+        migrationsDir: 'src/migration',
+        subscribersDir: 'src/subscriber'
     }
 }
