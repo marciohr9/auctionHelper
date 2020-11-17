@@ -1,7 +1,8 @@
-import {Column, CreateDateColumn, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import User from './user';
-import Item from './item';
-import Auction from './auction';
+import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import User from './user.entity';
+import Item from './item.entity';
+import Auction from './auction.entity';
+import TimeLog from './timerLog.entity';
 
 @Entity()
 export default class Search {
@@ -16,4 +17,6 @@ export default class Search {
     @ManyToMany(()=>Auction)
     @JoinTable()
     auctions!: Auction[];
+    @Column(type => TimeLog)
+    log!: TimeLog;
 }

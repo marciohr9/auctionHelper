@@ -1,6 +1,7 @@
-import {Column, Entity, Generated, JoinColumn, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn} from 'typeorm';
-import Auth from './auth';
-import Search from './search';
+import {Column, Entity, Generated, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import Auth from './auth.entity';
+import Search from './search.entity';
+import TimeLog from './timerLog.entity';
 
 @Entity()
 export default class User {
@@ -22,4 +23,6 @@ export default class User {
     auth!: Auth;
     @OneToMany(() => Search, search => search.user)
     searchs!: Search[];
+    @Column(type => TimeLog)
+    log!: TimeLog;
 }

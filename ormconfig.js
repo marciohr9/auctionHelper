@@ -6,10 +6,10 @@ module.exports = {
     password: process.env.DB_PASSWORD,
     database: process.env.DB_DATABASE,
     loggin: true,
-    synchronize: true,
-    insecureAuth : true,
+    synchronize: false,
+    migrationsTableName: 'actionhelper_migrations',
     entities: [
-        __dirname + '/model/*.ts'
+        __dirname + '/model/*.entity.ts'
     ],
     subscribers: [
         __dirname + '/subscriber/*.ts'

@@ -1,5 +1,6 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import Item from './item';
+import Item from './item.entity';
+import TimeLog from './timerLog.entity';
 
 @Entity()
 export default class ReagentToItem{
@@ -13,4 +14,6 @@ export default class ReagentToItem{
     public quantity!: number;
     @ManyToOne(()=> Item, item => item.reagents)
     public item!: Item;
+    @Column(type => TimeLog)
+    log!: TimeLog;
 }

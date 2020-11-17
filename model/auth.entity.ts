@@ -1,4 +1,5 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import TimeLog from './timerLog.entity';
 
 @Entity()
 export default class Auth {
@@ -10,4 +11,6 @@ export default class Auth {
     bnetToken!: string;
     @Column({type: 'varchar', length: 250})
     passwordToken!: string;
+    @Column(type => TimeLog)
+    log!: TimeLog;
 }

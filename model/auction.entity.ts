@@ -1,5 +1,6 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import Item from './item';
+import Item from './item.entity';
+import TimeLog from './timerLog.entity';
 
 export enum Duration{
     SHORT = 12,
@@ -19,8 +20,8 @@ export default class Auction {
     seller!: string;
     @Column()
     realm!: string;
-    @Column({type: 'float'})
-    bind!: number;
+    @Column({type: 'float', nullable: true})
+    bind?: number;
     @Column({type: 'timestamp'})
     dateRegistered!: string;
     @Column({
@@ -30,4 +31,6 @@ export default class Auction {
     duration!: Duration;
     @ManyToOne(() => Item, item => item.auctions)
     item!: Item;
+    @Column(type => TimeLog)
+    log!: TimeLog;
 }

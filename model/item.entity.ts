@@ -1,8 +1,9 @@
-import {Column, Entity, ManyToMany, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import Auction from './auction';
-import Icon from './icon';
-import ReagentToItem from './reagent';
-import Search from './search';
+import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import Auction from './auction.entity';
+import Icon from './icon.entity';
+import ReagentToItem from './reagent.entity';
+import Search from './search.entity';
+import TimeLog from './timerLog.entity';
 
 export enum MaxStack {
     UNIQUE = 1,
@@ -39,4 +40,6 @@ export default class Item {
     auctions!: Auction[];
     @OneToMany(() => ReagentToItem, reagents => reagents.item)
     public reagents!: ReagentToItem[];
+    @Column(type => TimeLog)
+    log!: TimeLog;
 }
