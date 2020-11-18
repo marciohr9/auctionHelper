@@ -66,5 +66,5 @@
     "skipLibCheck": true,                     /* Skip type checking of declaration files. */
     "forceConsistentCasingInFileNames": true
   },
-  "exclude": ["node_modules", "**/*.spec.ts", "ormconfig.js"]
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

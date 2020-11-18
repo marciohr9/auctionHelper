@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table, TableIndex} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey, TableIndex} from "typeorm";
 
 export class Item1605619138345 implements MigrationInterface {
 
@@ -43,9 +43,9 @@ export class Item1605619138345 implements MigrationInterface {
             {
                 name: 'maxStack',
                 type: 'enum',
-                enum: ['1','5','10','15','20','100','200'],
+                enum: ['UNIQUE','SMALL','MEDIUM','NORMAL','LARGE','XLARGE'],
                 isNullable: false,
-                default: '20'
+                default: "'NORMAL'"
             },
             {
                 name: 'image',
@@ -55,25 +55,23 @@ export class Item1605619138345 implements MigrationInterface {
             {
                 name: 'iconLabel',
                 type: 'varchar',
-                length: '250',
                 isNullable: false,
-                isUnique: true
             },
             {
                 name: 'created_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'updated_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'deleted_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: true
             }
         ]
@@ -84,6 +82,16 @@ export class Item1605619138345 implements MigrationInterface {
         await queryRunner.createIndex('item', new TableIndex({
             name: 'IDX_ITEM',
             columnNames: ['name','crafted','maxStack']
+        }));
+        await queryRunner.createForeignKey('auction', new TableForeignKey({
+            columnNames: ['auctionItemId'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'item'
+        }));
+        await queryRunner.createForeignKey('search', new TableForeignKey({
+            columnNames: ['searchItemId'],
+            referencedColumnNames: ['id'],
+            referencedTableName: 'item'
         }));
     }
 

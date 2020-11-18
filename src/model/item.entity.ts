@@ -29,7 +29,8 @@ export default class Item {
     basePrice!: number
     @Column({
         type: "enum",
-        enum: MaxStack
+        enum: MaxStack,
+        default: String(MaxStack.NORMAL)
     })
     maxStack!: MaxStack;
     @Column(type => Icon)

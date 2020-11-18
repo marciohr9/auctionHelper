@@ -12,7 +12,7 @@ export class Auction1605618385522 implements MigrationInterface {
                 generationStrategy: 'increment'
             },
             {
-                name: 'itemId',
+                name: 'auctionItemId',
                 type: 'int',
                 isNullable: false
             },
@@ -34,12 +34,12 @@ export class Auction1605618385522 implements MigrationInterface {
             },
             {
                 name: 'bind',
-                type: 'flaot',
+                type: 'float',
                 isNullable: true
             },
             {
                 name: 'dateRegistered',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false
             },
             {
@@ -56,19 +56,19 @@ export class Auction1605618385522 implements MigrationInterface {
             },
             {
                 name: 'created_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'updated_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'deleted_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: true
             }
         ]
@@ -77,26 +77,22 @@ export class Auction1605618385522 implements MigrationInterface {
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(this.auctionTable,true);
         await queryRunner.createIndex('auction', new TableIndex({
-            name: 'IDX_SELLER',
+            name: 'IDX_auctionSeller',
             columnNames: ['seller','realmName']
         }));
         await queryRunner.createIndex('auction', new TableIndex({
-            name: 'IDX_ITEM',
-            columnNames: ['itemId']
+            name: 'IDX_auctionItem',
+            columnNames: ['auctionItemId']
         }));
-        await queryRunner.createForeignKey('auction', new TableForeignKey({
-            columnNames: ['itemId'],
-            referencedColumnNames: ['id'],
-            referencedTableName: 'item'
-        }));
+        
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
         const table = await queryRunner.getTable('item');
-        const foreingKey = table!.foreignKeys.find(fk => fk.columnNames.indexOf('itemId') !== -1);
+        const foreingKey = table!.foreignKeys.find(fk => fk.columnNames.indexOf('auctionItemId') !== -1);
         await queryRunner.dropForeignKey('item', foreingKey!);
-        await queryRunner.dropIndex('auction', 'IDX_SELLER');
-        await queryRunner.dropIndex('auction', 'IDX_ITEM');
+        await queryRunner.dropIndex('auction', 'IDX_auctionSeller');
+        await queryRunner.dropIndex('auction', 'IDX_auctionItem');
         await queryRunner.dropTable('auction');
     }
 }

@@ -14,8 +14,7 @@ export class User1605618378992 implements MigrationInterface {
             {
                 name: 'uuid',
                 type: 'varchar',
-                generationStrategy: 'uuid',
-                default:'uuid_generate_v4()',
+                isUnique: true,
                 isNullable: false
             },
             {
@@ -50,19 +49,19 @@ export class User1605618378992 implements MigrationInterface {
             },
             {
                 name: 'created_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'updated_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'deleted_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: true
             }
             
@@ -74,14 +73,8 @@ export class User1605618378992 implements MigrationInterface {
         await queryRunner.createTable(this.userTable,true);
 
         await queryRunner.createIndex("user", new TableIndex({
-            name: "IDX_USER",
+            name: "IDX_searchUser",
             columnNames: ["name","email"]
-        }));
-        await queryRunner.createForeignKey("user", new TableForeignKey({
-            columnNames: ['authId'],
-            referencedColumnNames: ['id'],
-            referencedTableName: "auth",
-            onDelete: "CASCADE"
         }));
     }
 
@@ -90,7 +83,7 @@ export class User1605618378992 implements MigrationInterface {
         const foreingKey = table!.foreignKeys.find(fk => fk.columnNames.indexOf("authId") !== -1)
         await queryRunner.dropForeignKey('user', foreingKey!);
         await queryRunner.dropColumn('user', 'authId');
-        await queryRunner.dropIndex('user','IDX_USER');
+        await queryRunner.dropIndex('user','IDX_searchUser');
         await queryRunner.dropTable('user');
     }
 

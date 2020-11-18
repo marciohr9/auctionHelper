@@ -1,4 +1,4 @@
-import {MigrationInterface, QueryRunner, Table} from "typeorm";
+import {MigrationInterface, QueryRunner, Table, TableForeignKey} from "typeorm";
 
 export class Auth1605619117514 implements MigrationInterface {
 
@@ -35,19 +35,19 @@ export class Auth1605619117514 implements MigrationInterface {
             },
             {
                 name: 'created_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'updated_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
                 name: 'deleted_at',
-                type: 'timestamptz',
+                type: 'timestamp',
                 isNullable: true
             }
         ]
@@ -55,6 +55,12 @@ export class Auth1605619117514 implements MigrationInterface {
 
     public async up(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.createTable(this.authTable,true);
+        await queryRunner.createForeignKey("user", new TableForeignKey({
+            columnNames: ['authId'],
+            referencedColumnNames: ['id'],
+            referencedTableName: "auth",
+            onDelete: "CASCADE"
+        }));
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
