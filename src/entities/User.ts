@@ -22,7 +22,7 @@ class User {
     @JoinColumn()
     auth!: Auth;
     @OneToMany(() => Search, search => search.user)
-    searchs!: Search[];
+    searchs!: Array<Search>;
     @Column(type => TimeLog)
     log!: TimeLog;
 }

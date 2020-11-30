@@ -9,6 +9,7 @@ export class Auth1605619117514 implements MigrationInterface {
                 name: 'id',
                 type: 'int',
                 isPrimary: true,
+                isGenerated: true,
                 generationStrategy: 'increment',
                 isNullable: false
             },
@@ -34,19 +35,19 @@ export class Auth1605619117514 implements MigrationInterface {
                 isUnique: true
             },
             {
-                name: 'created_at',
+                name: 'logCreated_at',
                 type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
-                name: 'updated_at',
+                name: 'logUpdated_at',
                 type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
-                name: 'deleted_at',
+                name: 'logDeleted_at',
                 type: 'timestamp',
                 isNullable: true
             }

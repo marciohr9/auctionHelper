@@ -9,6 +9,7 @@ export class Auction1605618385522 implements MigrationInterface {
                 name: 'id',
                 type: 'int',
                 isPrimary: true,
+                isGenerated: true,
                 generationStrategy: 'increment'
             },
             {
@@ -55,19 +56,19 @@ export class Auction1605618385522 implements MigrationInterface {
                 isNullable: false
             },
             {
-                name: 'created_at',
+                name: 'logCreated_at',
                 type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
-                name: 'updated_at',
+                name: 'logUpdated_at',
                 type: 'timestamp',
                 isNullable: false,
                 default: 'now()'
             },
             {
-                name: 'deleted_at',
+                name: 'logDeleted_at',
                 type: 'timestamp',
                 isNullable: true
             }

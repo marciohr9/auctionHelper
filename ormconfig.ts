@@ -1,5 +1,5 @@
 module.exports = {
-    type: process.env.DB_TYPE || 'mysql',
+    type: process.env.DB_TYPE,
     host: process.env.DB_HOST,
     port: process.env.DB_PORT,
     username: process.env.DB_USER,
@@ -8,9 +8,9 @@ module.exports = {
     loggin: true,
     migrationsTableName: '_migrations',
     synchronize: false,
-    entities: [ __dirname + 'src/entities/*.ts'],
-    subscribers: [ __dirname + 'src/subscriber/*.ts'],
-    migrations: [ __dirname + 'src/database/migration/*.ts'],
+    entities: [ __dirname + '/src/entities/*.ts'],
+    subscribers: [ __dirname + '/src/subscriber/*.ts'],
+    migrations: [ __dirname + '/src/database/migration/*.ts'],
     cli:{
         entitiesDir: 'src/entities',
         migrationsDir: 'src/migration',
