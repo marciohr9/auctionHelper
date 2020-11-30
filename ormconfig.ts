@@ -8,12 +8,11 @@ module.exports = {
     loggin: true,
     migrationsTableName: '_migrations',
     synchronize: false,
-    entities: [ __dirname + '/src/entities/*.ts'],
-    subscribers: [ __dirname + '/src/subscriber/*.ts'],
+    entities: [ __dirname + '/src/entity/*.entity.ts'],
     migrations: [ __dirname + '/src/database/migration/*.ts'],
     cli:{
-        entitiesDir: 'src/entities',
-        migrationsDir: 'src/migration',
+        entitiesDir: 'src/entity',
+        migrationsDir: 'src/database/migration',
         subscribersDir: 'src/subscriber'
     }
 }

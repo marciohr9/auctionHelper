@@ -1,9 +1,9 @@
 import {Column, Entity, Generated, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
-import Auth from './Auth';
-import Search from './Search';
-import TimeLog from './timerLog';
+import Auth from './Auth.entity';
+import Search from './Search.entity';
+import TimeLog from './timerLog.entity';
 
-@Entity('user')
+@Entity()
 class User {
     @PrimaryGeneratedColumn()
     id!: number;

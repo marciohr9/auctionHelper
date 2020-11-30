@@ -1,5 +1,5 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
-import TimeLog from './timerLog';
+import TimeLog from './timerLog.entity';
 
 @Entity()
 class Auth {

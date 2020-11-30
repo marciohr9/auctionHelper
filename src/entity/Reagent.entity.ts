@@ -1,6 +1,6 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import {Item} from './Item';
-import TimeLog from './timerLog';
+import {Item} from './Item.entity';
+import TimeLog from './timerLog.entity';
 
 @Entity()
 class ReagentToItem{

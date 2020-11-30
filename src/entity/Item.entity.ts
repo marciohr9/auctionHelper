@@ -1,9 +1,9 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import {Auction} from './Auction';
-import Icon from './icon';
-import ReagentToItem from './Reagent';
-import Search from './Search';
-import TimeLog from './timerLog';
+import {Auction} from './Auction.entity';
+import Icon from './icon.entity';
+import ReagentToItem from './Reagent.entity';
+import Search from './Search.entity';
+import TimeLog from './timerLog.entity';
 
 enum MaxStack {
     UNIQUE = 1,

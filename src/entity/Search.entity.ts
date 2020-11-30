@@ -1,8 +1,8 @@
 import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import User from './User';
-import {Item} from './Item';
-import {Auction} from './Auction';
-import TimeLog from './timerLog';
+import User from './User.entity';
+import {Item} from './Item.entity';
+import {Auction} from './Auction.entity';
+import TimeLog from './timerLog.entity';
 
 @Entity()
 class Search {
