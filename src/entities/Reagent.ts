@@ -1,9 +1,9 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import Item from './item.entity';
-import TimeLog from './timerLog.entity';
+import {Item} from './Item';
+import TimeLog from './timerLog';
 
 @Entity()
-export default class ReagentToItem{
+class ReagentToItem{
     @PrimaryGeneratedColumn()
     public id!: number;
     @Column()
@@ -17,3 +17,5 @@ export default class ReagentToItem{
     @Column(type => TimeLog)
     log!: TimeLog;
 }
+
+export default ReagentToItem;

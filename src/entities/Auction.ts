@@ -1,15 +1,15 @@
 import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import Item from './item.entity';
-import TimeLog from './timerLog.entity';
+import {Item} from './Item';
+import TimeLog from './timerLog';
 
-export enum Duration{
+enum Duration{
     SHORT = 12,
     LONG = 24,
     VERYLONG = 48,
 }
 
 @Entity()
-export default class Auction {
+class Auction {
     @PrimaryGeneratedColumn()
     id!: number;
     @Column()
@@ -33,4 +33,9 @@ export default class Auction {
     item!: Item;
     @Column(type => TimeLog)
     log!: TimeLog;
+}
+
+export {
+    Duration,
+    Auction
 }

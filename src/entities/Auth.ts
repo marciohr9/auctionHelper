@@ -1,8 +1,8 @@
 import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
-import TimeLog from './timerLog.entity';
+import TimeLog from './timerLog';
 
 @Entity()
-export default class Auth {
+class Auth {
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: 'varchar', length: 250})
@@ -14,3 +14,5 @@ export default class Auth {
     @Column(type => TimeLog)
     log!: TimeLog;
 }
+
+export default Auth;

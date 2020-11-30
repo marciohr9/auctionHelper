@@ -1,11 +1,11 @@
 import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
-import User from './user.entity';
-import Item from './item.entity';
-import Auction from './auction.entity';
-import TimeLog from './timerLog.entity';
+import User from './User';
+import {Item} from './Item';
+import {Auction} from './Auction';
+import TimeLog from './timerLog';
 
 @Entity()
-export default class Search {
+class Search {
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: 'timestamp'})
@@ -16,7 +16,9 @@ export default class Search {
     item!: Item;
     @ManyToMany(()=>Auction)
     @JoinTable()
-    auctions!: Auction[];
+    auctions!: Array<Auction>;
     @Column(type => TimeLog)
     log!: TimeLog;
 }
+
+export default Search;

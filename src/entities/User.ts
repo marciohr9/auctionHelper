@@ -1,10 +1,10 @@
 import {Column, Entity, Generated, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
-import Auth from './auth.entity';
-import Search from './search.entity';
-import TimeLog from './timerLog.entity';
+import Auth from './Auth';
+import Search from './Search';
+import TimeLog from './timerLog';
 
 @Entity('user')
-export default class User {
+class User {
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: "uuid", unique: true})
@@ -26,3 +26,5 @@ export default class User {
     @Column(type => TimeLog)
     log!: TimeLog;
 }
+
+export default User;

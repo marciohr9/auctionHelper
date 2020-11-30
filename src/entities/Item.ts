@@ -1,11 +1,11 @@
 import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
-import Auction from './auction.entity';
-import Icon from './icon.entity';
-import ReagentToItem from './reagent.entity';
-import Search from './search.entity';
-import TimeLog from './timerLog.entity';
+import {Auction} from './Auction';
+import Icon from './icon';
+import ReagentToItem from './Reagent';
+import Search from './Search';
+import TimeLog from './timerLog';
 
-export enum MaxStack {
+enum MaxStack {
     UNIQUE = 1,
     SMALL = 5,
     MEDIUM = 10,
@@ -14,7 +14,7 @@ export enum MaxStack {
     XLARGE = 200
 }
 @Entity()
-export default class Item {
+class Item {
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: 'varchar', length: 100})
@@ -43,4 +43,8 @@ export default class Item {
     public reagents!: ReagentToItem[];
     @Column(type => TimeLog)
     log!: TimeLog;
+}
+export {
+    Item,
+    MaxStack
 }

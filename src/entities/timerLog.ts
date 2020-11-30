@@ -1,6 +1,6 @@
 import {CreateDateColumn, DeleteDateColumn, UpdateDateColumn} from 'typeorm';
 
-export default class TimeLog{
+class TimeLog{
     @CreateDateColumn({
         nullable: false,
         name: "created_at"
@@ -16,3 +16,5 @@ export default class TimeLog{
     })
     deletedAt?: Date;
 }
+
+export default TimeLog;
