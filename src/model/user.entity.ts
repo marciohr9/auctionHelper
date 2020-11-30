@@ -15,7 +15,7 @@ export default class User {
     @Column({type: 'varchar',length:100})
     name!: string;
     @Column({unique: true})
-    phone!: number;
+    phone!: string;
     @Column({unique: true})
     bnetID!: string;
     @OneToOne(()=> Auth,{cascade: true})

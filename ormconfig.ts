@@ -1,5 +1,3 @@
-import { ConnectionOptions } from 'typeorm';
-
 module.exports = {
     type: process.env.DB_TYPE || 'mysql',
     host: process.env.DB_HOST,

@@ -31,16 +31,17 @@ export class User1605618378992 implements MigrationInterface {
             },
             {
                 name:'phone',
-                type: 'int',
+                type: 'varchar',
+                length: '50',
                 isNullable: true,
                 isUnique: true
             },
             {
                 name: 'bnetId',
                 type: 'varchar',
+                length: '50',
                 isNullable: false,
-                isUnique: true,
-                length: '50'
+                isUnique: true           
             },
             {
                 name: 'authId',
