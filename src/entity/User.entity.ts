@@ -1,10 +1,10 @@
-import {Column, Entity, Generated, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, Generated, JoinColumn, OneToMany, OneToOne, PrimaryGeneratedColumn} from 'typeorm';
 import Auth from './Auth.entity';
 import Search from './Search.entity';
 import TimeLog from './timerLog.entity';
 
 @Entity()
-class User {
+class User extends BaseEntity{
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: "uuid", unique: true})

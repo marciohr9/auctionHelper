@@ -1,9 +1,9 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {Item} from './Item.entity';
 import TimeLog from './timerLog.entity';
 
 @Entity()
-class ReagentToItem{
+class ReagentToItem extends BaseEntity{
     @PrimaryGeneratedColumn()
     public id!: number;
     @Column()

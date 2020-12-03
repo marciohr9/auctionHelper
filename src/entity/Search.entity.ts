@@ -1,11 +1,11 @@
-import {Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, JoinTable, ManyToMany, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import User from './User.entity';
 import {Item} from './Item.entity';
 import {Auction} from './Auction.entity';
 import TimeLog from './timerLog.entity';
 
 @Entity()
-class Search {
+class Search extends BaseEntity{
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: 'timestamp'})

@@ -1,4 +1,4 @@
-import {Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, ManyToOne, PrimaryGeneratedColumn} from 'typeorm';
 import {Item} from './Item.entity';
 import TimeLog from './timerLog.entity';
 
@@ -9,7 +9,7 @@ enum Duration{
 }
 
 @Entity()
-class Auction {
+class Auction extends BaseEntity{
     @PrimaryGeneratedColumn()
     id!: number;
     @Column()

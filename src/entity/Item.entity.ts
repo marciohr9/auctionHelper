@@ -1,4 +1,4 @@
-import {Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, OneToMany, PrimaryGeneratedColumn} from 'typeorm';
 import {Auction} from './Auction.entity';
 import Icon from './icon.entity';
 import ReagentToItem from './Reagent.entity';
@@ -14,7 +14,7 @@ enum MaxStack {
     XLARGE = 200
 }
 @Entity()
-class Item {
+class Item extends BaseEntity{
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: 'varchar', length: 100})

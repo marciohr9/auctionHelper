@@ -1,8 +1,8 @@
-import {Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
+import {BaseEntity, Column, Entity, PrimaryGeneratedColumn} from 'typeorm';
 import TimeLog from './timerLog.entity';
 
 @Entity()
-class Auth {
+class Auth extends BaseEntity{
     @PrimaryGeneratedColumn()
     id!: number;
     @Column({type: 'varchar', length: 250})

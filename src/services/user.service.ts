@@ -2,8 +2,7 @@ import { getManager, getRepository } from "typeorm";
 import User from "../entity/User.entity";
 
 const buscarUser = async (userId: number) => {
-    const userRepository = getRepository(User);
-    const user = await userRepository.findOne(userId);
+    const user = await User.findOneOrFail({where: {id: userId}});
     return user;
 }
 
