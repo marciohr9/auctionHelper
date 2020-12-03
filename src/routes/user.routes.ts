@@ -1,13 +1,11 @@
 import express from 'express';
-import {buscarUser} from '../services/user';
+import {buscarUser} from '../services/user.service';
 
-const router = express.Router();
+const userRouter = express.Router();
 
-// VALIDACAO
-router.use()
 
 // TESTE
-router.route('/')
+userRouter.route('/')
     .post((req,res)=>{
         res.status(200).json({mensage: 'efetuar login'});
     })
@@ -20,8 +18,9 @@ router.route('/')
         });
     
     });
+
 // GERENCIA PROFILE
-router.route('/profile/{}')
+userRouter.route('/profile/')
     .get((req, res)=>{
         res.status(200).json({mensage: 'pesquisa profile'})
     })
@@ -32,4 +31,4 @@ router.route('/profile/{}')
         res.status(200).json({mensage: 'atualiza contatos'})
     });
 
-export default router;
+export default userRouter;

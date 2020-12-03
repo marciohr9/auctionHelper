@@ -2,8 +2,8 @@ import 'dotenv/config';
 import 'reflect-metadata';
 import './database';
 import express from 'express';
-import useRoute from './routes/user';
-import loginRoute from './routes/login';
+import useRoute from './routes/user.routes';
+import loginRoute from './routes/login.routes';
 import cors from 'cors';
 const app = express();
 
