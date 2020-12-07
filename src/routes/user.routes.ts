@@ -1,7 +1,7 @@
-import express from 'express';
+import {Router} from 'express';
 import {buscarUser} from '../services/user.service';
 
-const userRouter = express.Router();
+const userRouter = Router();
 
 
 // TESTE

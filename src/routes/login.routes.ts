@@ -1,6 +1,6 @@
-import express from 'express';
+import {Router} from 'express';
 
-const loginRouter = express.Router();
+const loginRouter = Router();
 
 // LOGIN
 loginRouter.route('/login')
