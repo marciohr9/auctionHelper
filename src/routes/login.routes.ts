@@ -1,17 +1,24 @@
-import {Router} from 'express';
-
+import { Router } from 'express';
+import { Login } from '../services/auth.service';
 const loginRouter = Router();
 
 // LOGIN
-loginRouter.route('/login')
-    .post((req,res)=>{
-        res.status(200).json({mensage: 'efetuar login'});
-    })
-    .get((req, res) => {
-        res.status(200).json({mensage: 'get someting'});
-    });
+loginRouter.post('/login', async (req,res, next) => {
+    try{
+        const {email, password} = req.body;
+        const auth = await Login(email,password);
+        if(auth.status){
+            res.status(200).json({auth: auth.status, mensage: `logged`});
+        }else{
+            res.status(401).json({auth: auth.status, mensage: auth.mensage});
+        }
+    }catch(err){
+        res.status(501).json({mensage: 'unespected error, try again', error: err});
+    }
+});
+
 // NOVO USUARIO
-loginRouter.post('/register', (req, res) => {
+loginRouter.post('/register',(req, res) => {
     try{
         const {email, password, bnetTag} = req.body
     }catch(err){
@@ -19,7 +26,7 @@ loginRouter.post('/register', (req, res) => {
     }
 });
 // RECUPERAR USER
-loginRouter.post('/recover', (req,res)=>{
+loginRouter.post('/recover', (req,res) => {
     res.status(200).json({mensage: 'email enviado!'});
 });
 
