@@ -10,7 +10,7 @@ class Auth extends BaseEntity{
     @Column({type: 'varchar', length: 250})
     bnetToken!: string;
     @Column({type: 'varchar', length: 250})
-    passwordToken!: string;
+    pwdHash!: string;
     @Column(type => TimeLog)
     log!: TimeLog;
 }
