@@ -1,5 +1,5 @@
 import {Router} from 'express';
-import {buscarUser} from '../services/user.service';
+import {buscarUser} from '../controller/user.controller';
 
 const userRouter = Router();
 
