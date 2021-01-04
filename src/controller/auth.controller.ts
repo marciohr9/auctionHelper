@@ -36,12 +36,12 @@ const Login = async (email: string, password: string): Promise<any> => {
         const auth = await Auth.findOne({where: {id: user.id}});
         const valid = await Verify(password, auth!.pwdHash).then((res)=>{
             if(res){
-                return {status: res, mensage: `Logged`};
+                return {authorized: res, mensage: `Logged`};
             }else{
-                return {status: res, mensage: `Invalid password.`};
+                return {authorized: res, mensage: `Invalid password.`};
             }
         }).catch((err)=>{
-                return {status: false, error_log: err}
+                return {authorized: false, mensage: 'unespected error on authentication', error_log: err}
         });
         return valid;
     }else{

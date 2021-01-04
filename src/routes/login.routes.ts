@@ -1,21 +1,20 @@
 import { Router } from 'express';
 import { AdvancedConsoleLogger } from 'typeorm';
-import { Login } from '../services/auth.service';
+import { Login } from '../controller/auth.controller';
 const loginRouter = Router();
 
 // LOGIN
 loginRouter.post('/login', async (req,res, next) => {
     try{
         const {email, password} = req.body;
-        Login(email,password).then((auth) => {
-            if(auth.status){
-                res.status(201).json({auth: auth.status, mensage: auth.mensage});
+        Login(email,password).then((obj) => {
+            if(obj.authorized){
+                res.status(201).json(obj);
             }else{
-                res.status(401).json({auth: auth.status, mensage: auth.mensage});
+                res.status(401).json(obj);
             }
         }).catch((err) => {
-            
-            res.status(500).json({auth: err.status, mensage: 'unespected error on authentication', error: err.error_log});
+            res.status(500).json(err);
         });
     }catch(err){
         res.status(500).json({mensage: 'unespected error, try again', error: err});
