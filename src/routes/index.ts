@@ -1,4 +1,4 @@
-import loginRouter from './login.routes';
+import loginRouter from './auth.routes';
 import userRouter from './user.routes';
 import {Router} from 'express';
 const routes = Router();
