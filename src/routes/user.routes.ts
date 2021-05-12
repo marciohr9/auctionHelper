@@ -1,25 +1,16 @@
-import {Router} from 'express';
-import {buscarUser} from '../controller/user.controller';
+import {Router, Request, Response} from 'express';
+import UserController from '../controller/user.controller';
+import {CheckJWT} from '../middlewares/jwtValidator.middleware';
+import {CheckRole} from '../middlewares/roleValidator.middleware';
 
 const userRouter = Router();
 
 
 // TESTE
 userRouter.route('/')
-    .post((req,res)=>{
-        res.status(200).json({mensage: 'efetuar login'});
-    })
-    .get((req, res) => {
-        buscarUser(1).then((user)=>{
-            console.log(user);
-            res.status(200).json(user);
-        }).catch((err)=>{
-            throw(err);
-        });
-    
-    });
+    .get([CheckJWT,CheckRole(["USER"])],UserController.SearchOne);
 
-// GERENCIA PROFILE
+//PROFILE CRUD
 userRouter.route('/profile/')
     .get((req, res)=>{
         res.status(200).json({mensage: 'pesquisa profile'})

@@ -5,7 +5,7 @@
   "main": "app.ts",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "typeorm:cli": "ts-node-dev ./node_modules/typeorm/cli -f ./ormconfig.ts",
+    "typeorm": "ts-node-dev ./node_modules/typeorm/cli -f ./ormconfig.ts",
     "dev": "cross-env NODE_ENV=dev nodemon src/server.ts",
     "prod": "cross-env NODE_ENV=prod nodemon src/server.ts"
   },
