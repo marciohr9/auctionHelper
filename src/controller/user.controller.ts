@@ -1,9 +1,9 @@
-import {Request, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import { stringify } from 'querystring';
 import UserRepository from "../entity/User.entity";
 class UserController {
 
-    static SearchOne = async (req: Request, res: Response) => {
+    static SearchProfile = async (req: Request, res: Response, next:NextFunction) => {
         const email = req.query.email;
         let user: UserRepository;
 
@@ -19,6 +19,18 @@ class UserController {
             if(err.name === "EntityNotFound") res.status(404).json({mensage: `Nenhum usuário encontrado com o email: ${email}`});
             else res.status(500).json({mensage: 'ocorreu um erro inesperado.'});
         }
+    }
+
+    static GetProfile = async (req: Request, res: Response, next:NextFunction) => {
+        res.status(200).json({ok:'OK'})
+    }
+
+    static SetProfile = async (req: Request, res: Response, next:NextFunction) => {
+        res.status(200).json({ok:'OK'})
+    }
+
+    static UpdateProfile = async (req: Request, res: Response, next:NextFunction) => {
+        res.status(200).json({ok:'OK'})
     }
     
 }

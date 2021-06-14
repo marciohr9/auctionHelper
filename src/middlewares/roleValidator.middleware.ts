@@ -1,5 +1,6 @@
 import {Request, Response, NextFunction} from 'express';
 import UserRepository from '../entity/User.entity';
+import ErroHandler from '../helpers/error.helper';
 
 const CheckRole = (roles: Array<string>) => {
     return async (req: Request, res: Response, next: NextFunction) => {
@@ -13,11 +14,13 @@ const CheckRole = (roles: Array<string>) => {
             if(roles.indexOf(user!.auth.role) > -1){ 
                 next();
             }else{
-                res.status(401).json({auth: false, mensage: 'user dont have permission to this function'});
+                let err = new ErroHandler(401, 'your user dont have permission to this function','No Permission!');
+                next(err);
             }
         }catch(err){
-            console.log(err);
-            res.status(501).json({mensage: 'unespected error!'});
+            if(err !instanceof ErroHandler){
+                next(err);
+            }
         }
     };
 };

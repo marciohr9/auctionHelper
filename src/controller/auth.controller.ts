@@ -1,45 +1,45 @@
-import {Request, Response} from 'express';
+import {NextFunction, Request, Response} from 'express';
 import UserEntity from '../entity/User.entity';
 import AuthEntity from '../entity/Auth.entity';
 import {Hash, Verify}from '../helpers/hashValidator.helper';
 import 'dotenv/config';
 import { CreateJWT } from '../middlewares/jwtValidator.middleware';
+import ErroHandler from '../helpers/error.helper';
 class AuthController {
     // Login Controller
-    static Login = async (req: Request, res: Response) => {
+    static Login = async (req: Request, res: Response, next: NextFunction) => {
         
         let {email, password} = req.body;
         let user: UserEntity;
-        let auth: AuthEntity;
+        let auth: AuthEntity | any;
         try{
 
             if(!(email && password)){
-                throw "empty";
+                let err = new ErroHandler(400, `email or password is empty`);
+                next(err);
             }
 
             user = await UserEntity.findOneOrFail({where: {email}});
-            auth = await AuthEntity.findOneOrFail({where: {id: user.id}});
+            auth = await AuthEntity.findOne({where: {id: user.id}});
             await Verify(password, auth!.pwdHash).then((obj: boolean)=>{
                 if(obj){
                     const token = CreateJWT(user.uuid, user.email);
                     res.status(201).json({message: `Logged`, token});
                 }else{
-                    throw "invalid-password";
+                    let err = new ErroHandler(401,`invalid password. Please try again.`,'Invalid Password');
+                    next(err);
                 }
             }).catch((err: any)=>{
-                if(err === "invalid-password"){
-                    res.status(401).json({message: `invalid password. Please try again.`})
-                }else{
-                    res.status(500).json({message: 'unespected error on authentication', error: err});
+                if(err !instanceof ErroHandler){
+                    next(err);
                 }
             });
         } catch (err: any){
-            if(err === "empty"){
-                res.status(400).json({message: `empity values`});
-            }else if(err.name === "EntityNotFound"){
-                res.status(401).json({message: `username ${email} not found. Please try again`});
+            if(err.name === "EntityNotFound"){
+                err = new ErroHandler(401,`username ${email} not found. Please try again.`);
+                next(err);
             }else{
-                res.status(500).json({message: `unespected error`, error: err});
+                next(err);
             }
         }
     }
