@@ -1,7 +1,7 @@
 import {NextFunction, Request, Response} from 'express';
 import UserEntity from '../entity/User.entity';
 import AuthEntity from '../entity/Auth.entity';
-import {Hash, Verify}from '../helpers/hashValidator.helper';
+import {Hash, Verify}from '../helpers/validator.helper';
 import 'dotenv/config';
 import { CreateJWT } from '../middlewares/jwtValidator.middleware';
 import ErroHandler from '../helpers/error.helper';
