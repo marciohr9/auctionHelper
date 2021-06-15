@@ -14,8 +14,8 @@ const handlerError = (error:Error, req: Request, res: Response, _: NextFunction)
 
     return res.status(500).json({
           status: 'Error',
-          stack: error.message,
           message: 'Internal server error',
+          stack: error.message,
 
     });
 }

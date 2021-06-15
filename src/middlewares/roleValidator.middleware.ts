@@ -4,7 +4,7 @@ import ErroHandler from '../helpers/error.helper';
 
 const CheckRole = (roles: Array<string>) => {
     return async (req: Request, res: Response, next: NextFunction) => {
-        //get UUID from jwt middleware
+        //# get UUID from jwt middleware payload
         const uuid = res.locals.jwtPayload.uuid;
 
         try{
@@ -14,13 +14,10 @@ const CheckRole = (roles: Array<string>) => {
             if(roles.indexOf(user!.auth.role) > -1){ 
                 next();
             }else{
-                let err = new ErroHandler(401, 'your user dont have permission to this function','No Permission!');
-                next(err);
+                throw new ErroHandler(401, 'your user dont have permission to this action.','No Permission!');
             }
         }catch(err){
-            if(err !instanceof ErroHandler){
-                next(err);
-            }
+            next(err);
         }
     };
 };

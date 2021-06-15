@@ -1,23 +1,21 @@
 import {NextFunction, Request, Response} from 'express';
 import { stringify } from 'querystring';
 import UserRepository from "../entity/User.entity";
+import ErroHandler from '../helpers/error.helper';
 class UserController {
 
     static SearchProfile = async (req: Request, res: Response, next:NextFunction) => {
         const email = req.query.email;
         let user: UserRepository;
-
-        if(!email) res.status(400).json({mensage: 'parameter email is required'});
-
         try{
-            user = await UserRepository.findOneOrFail({where: {email: email}});
-            if(res.getHeader("newToken")){
-                res.status(200).json({data:{uuid: user.uuid, email: user.email, name: user.name, Bnet: user.bnetID, phone: user.phone}, __tokenInfo:{ expiring: true, mensage: `ur token are expiring in ${res.getHeader("expireIn")} seconds, change for the new one`}});
-            }
-            res.status(200).json({data:{uuid: user.uuid, email: user.email, name: user.name, Bnet: user.bnetID, phone: user.phone}, __tokenInfo:{ expiring : false}});
+            if(!email) throw new ErroHandler(400, `parameter email is required`,`Missing Information`);
+
+            user = await UserRepository.findOneOrFail({select:["uuid","email","name","phone","bnetID"],where: {email: email}});
+            let data = {user};
+            res.status(200).json({data});
         }catch(err){
-            if(err.name === "EntityNotFound") res.status(404).json({mensage: `Nenhum usuário encontrado com o email: ${email}`});
-            else res.status(500).json({mensage: 'ocorreu um erro inesperado.'});
+            if(err.name === "EntityNotFound") err = new ErroHandler(404,`No user found with this email: ${email}`, `Data not Found`);
+            next(err);
         }
     }
 

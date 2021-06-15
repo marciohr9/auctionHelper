@@ -2,11 +2,11 @@ import { Router } from 'express';
 import AuthController from '../controller/auth.controller';
 const loginRouter = Router();
 
-// LOGIN
+//# login route
 loginRouter.post('/login', AuthController.Login);
-// NOVO USUARIO
+//# create new login route
 loginRouter.post('/newUser', AuthController.Register);
-// RECUPERAR USER
+//# recover login route
 loginRouter.post('/recover', AuthController.Recover);
 
 export default loginRouter;

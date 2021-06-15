@@ -5,14 +5,14 @@ import {CheckRole} from '../middlewares/roleValidator.middleware';
 
 const userRouter = Router();
 
-//PROFILE CRUD
+//# user profile CRUD route
 userRouter.route('/myProfile/')
     .get([CheckJWT,CheckRole(["USER","MANAGER","ADMIN"])],UserController.GetProfile)
     .post([CheckJWT,CheckRole(["USER","MANAGER","ADMIN"])],UserController.SetProfile)
     .put([CheckJWT,CheckRole(["USER","MANAGER","ADMIN"])],UserController.UpdateProfile);
 
-// TESTE
+//# search all profiles route
 userRouter.route('/profiles')
-    .get([CheckJWT,CheckRole(["MANAGER"])],UserController.SearchProfile);
+    .get([CheckJWT,CheckRole(["MANAGER","ADMIN"])],UserController.SearchProfile);
 
 export default userRouter;

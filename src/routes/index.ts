@@ -4,10 +4,11 @@ import {Router} from 'express';
 import ErroHandler from '../helpers/error.helper';
 const routes = Router();
 
-routes.use('/user', userRouter);
+//# routes to authentication
 routes.use('/', loginRouter);
-
-//## rota default para rota não encontrada.
+//# routes to work with user data
+routes.use('/user', userRouter);
+//# default route to wrong or not implemented routes
 routes.use('*',(req, res, next)=>{
     let err = new ErroHandler(404,'Route not found','U are lost?');
     next(err);
